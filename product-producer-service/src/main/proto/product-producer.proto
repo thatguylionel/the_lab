@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "de.hdi.product_producer_service";
+option java_outer_classname = "ProductServiceProto";
+
+package product;
+
+service ProductService {
+  rpc GetProduct(ProductRequest) returns (ProductResponse) {}
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {}
+  rpc CreateProduct(CreateProductRequest) returns (ProductResponse) {}
+}
+
+message ProductRequest {
+  int32 product_id = 1;
+}
+
+message ProductResponse {
+  int32 product_id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+}
+
+message ListProductsRequest {
+  // Empty request for listing all products
+}
+
+message ListProductsResponse {
+  repeated ProductResponse products = 1;
+}
+
+message CreateProductRequest {
+  string name = 1;
+  string description = 2;
+  double price = 3;
+}
