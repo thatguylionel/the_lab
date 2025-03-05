@@ -1,4 +1,4 @@
-package de.hdi.order_kotlin_service.config
+package de.hdi.order_kotlin_service.grpc.config
 
 import de.hdi.product_producer_service.ProductServiceGrpc
 import io.grpc.ManagedChannel
@@ -13,7 +13,7 @@ class GrpcClientConfig {
 
     private val logger = LoggerFactory.getLogger(GrpcClientConfig::class.java)
 
-    @Value("\${spring.grpc.client.product-producer.address:localhost:9090}")
+    @Value("\${spring.grpc.client.product-producer.address}")
     private lateinit var productServiceAddress: String
 
     @Bean
@@ -28,10 +28,6 @@ class GrpcClientConfig {
             host = productServiceAddress
             port = 9090 // Default gRPC port
         }
-
-        System.setProperty("io.netty.transport.noNative", "true")
-        System.setProperty("io.grpc.ChannelImpl.disableDetectingTransport", "true")
-
         return ManagedChannelBuilder.forAddress(host, port)
             .usePlaintext()
             .build()
