@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Order, OrderStatus } from '../models/order';
+import { OrderStatus } from '../models/order';
 import orderService from '../services/order-service';
 
 export class OrderController {
